@@ -74,8 +74,8 @@ public class ArrayList<E> {
     public E remove(int index) {
         rangeCheck(index);
         E element = elements[index];
-        System.arraycopy(elements, index+1, elements,index , size-index-1); //  2 3 5  6  7 9   index:1
-        elements[--size] = null;  // 将最后一个元素设置为 null                                                        //  2 5 6  7  9 9
+        System.arraycopy(elements, index+1, elements,index , size-index-1); //  2 3 5 6 7 9   index:1
+        elements[--size] = null;  // 将最后一个元素设置为 null                               //  2 5 6 7 9 9
         return element;
     }
 
