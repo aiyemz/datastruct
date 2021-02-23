@@ -1,15 +1,16 @@
 package com.aiyemz.datastruct.arraylist;
 
+import com.aiyemz.datastruct.list.AbstractList;
+
 /**
  * 动态数组
  */
 
-public class ArrayList<E> {
+public class ArrayList<E> extends AbstractList<E> {
 
     private E[] elements;
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
-    private static final int ELEMENT_NOT_FOUND = -1;
 
     public ArrayList() {
         this(DEFAULT_CAPACITY);
@@ -20,36 +21,7 @@ public class ArrayList<E> {
         elements = (E[]) new Object[capacity];
     }
 
-
-    public int size() {
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public boolean contains(E element) {
-        if (element == null) {
-            for (int i=0; i<elements.length; i++) {
-                if (elements[i] == null) {
-                    return true;
-                }
-            }
-        } else {
-            for (int i=0; i<elements.length; i++) {
-                if (element.equals(elements[i])) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public void add(E element) {
-        add(size, element);
-    }
-
+    @Override
     public void add(int index, E element) {
         rangeCheckForAdd(index);
         // 是否扩容
@@ -59,11 +31,13 @@ public class ArrayList<E> {
         size++;
     }
 
+    @Override
     public E get(int index) {
         rangeCheck(index);
         return elements[index];
     }
 
+    @Override
     public E set(int index, E element) {
         rangeCheck(index);
         E oldElement = elements[index];
@@ -71,6 +45,7 @@ public class ArrayList<E> {
         return oldElement;
     }
 
+    @Override
     public E remove(int index) {
         rangeCheck(index);
         E element = elements[index];
@@ -79,6 +54,7 @@ public class ArrayList<E> {
         return element;
     }
 
+    @Override
     public int indexOf(E element) {
         if (element == null) {
             for (int i=0; i<elements.length; i++) {
@@ -96,24 +72,9 @@ public class ArrayList<E> {
         return ELEMENT_NOT_FOUND;
     }
 
+    @Override
     public void clear() {
         size = 0;
-    }
-
-    public void rangeCheck(int index) {
-        if (index<0 || index>=size) {
-            outOfBounds(index);
-        }
-    }
-
-    public void rangeCheckForAdd(int index) {
-        if (index<0 || index>size) {
-            outOfBounds(index);
-        }
-    }
-
-    public void outOfBounds(int index) {
-        throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
     }
 
     private void ensureCapacity(int capacity) { // 10 size:9
@@ -125,5 +86,4 @@ public class ArrayList<E> {
         E[] newElements = (E[])new Object[newLength];
         System.arraycopy(elements, 0, newElements, 0, size);
     }
-
 }
