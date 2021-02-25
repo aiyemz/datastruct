@@ -1,6 +1,7 @@
 package com.aiyemz.datastruct.linkedlist.single;
 
 import com.aiyemz.datastruct.list.AbstractList;
+import com.sun.jmx.mbeanserver.NamedObject;
 
 public class SingleLinkedList<E> extends AbstractList<E> {
 
@@ -44,7 +45,17 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        rangeCheck(index);
+        Node<E> node = head;
+        if (index == 0) {
+            head = head.nextNode;
+        } else {
+            Node<E> prev = curNode(index - 1);
+            node = prev.nextNode;
+            prev.nextNode = node.nextNode;
+        }
+        size--;
+        return node.element;
     }
 
     @Override
