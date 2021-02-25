@@ -1,8 +1,11 @@
 package com.aiyemz.datastruct.linkedlist.single;
 
 import com.aiyemz.datastruct.list.AbstractList;
-import com.sun.jmx.mbeanserver.NamedObject;
 
+/**
+ * 不带头结点的单向链表
+ * @param <E>
+ */
 public class SingleLinkedList<E> extends AbstractList<E> {
 
     private Node<E> head;
