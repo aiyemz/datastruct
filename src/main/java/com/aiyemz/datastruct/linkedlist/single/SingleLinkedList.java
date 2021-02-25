@@ -19,7 +19,14 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 
     @Override
     public void add(int index, E element) {
-
+        rangeCheck(index);
+        if (index == 0) {
+            head = new Node<>(element, head);
+        } else {
+            Node<E> prev = curNode(index - 1);
+            prev.nextNode = new Node<>(element,prev.nextNode);
+        }
+        size++;
     }
 
     @Override
