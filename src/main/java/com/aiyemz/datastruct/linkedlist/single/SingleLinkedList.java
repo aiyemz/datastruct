@@ -42,12 +42,23 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 
     @Override
     public int indexOf(E element) {
+        Node<E> node = head;
         if (element == null) {
-
+            for (int i=0; node != null; i++) {
+                if (node.element == null) {
+                    return i;
+                }
+                node = node.nextNode;
+            }
         } else {
-
+            for (int i=0; node != null; i++) {
+                if (element.equals(node.element)) {
+                    return i;
+                }
+                node = node.nextNode;
+            }
         }
-        return 0;
+        return ELEMENT_NOT_FOUND;
     }
 
     @Override
