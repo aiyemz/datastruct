@@ -47,7 +47,12 @@ public class SingleLinkedListWithHead<E> extends AbstractList<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        rangeCheck(index);
+        Node<E> prev = index==0? head: curNode(index - 1);
+        Node<E> node = prev.nextNode;
+        prev.nextNode = node.nextNode;
+        size--;
+        return node.element;
     }
 
     @Override
