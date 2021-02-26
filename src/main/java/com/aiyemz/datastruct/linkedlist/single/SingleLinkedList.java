@@ -23,7 +23,7 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 
     @Override
     public void add(int index, E element) {
-        rangeCheck(index);
+        rangeCheckForAdd(index);
         if (index == 0) {
             head = new Node<>(element, head);
         } else {
