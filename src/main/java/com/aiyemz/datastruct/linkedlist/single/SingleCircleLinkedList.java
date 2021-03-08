@@ -18,11 +18,30 @@ public class SingleCircleLinkedList<E> extends AbstractList<E> {
             this.element = element;
             this.nextNode = nextNode;
         }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(element).append("_").append(nextNode.element);
+            return sb.toString();
+        }
     }
+
 
     @Override
     public void add(int index, E element) {
-
+        rangeCheckForAdd(index);
+        if (index == 0) {
+            Node<E> newHead = new Node<>(element, head);
+            // 查找最后一个元素
+            Node<E> last = size==0? newHead: curNode(size-1);
+            last.nextNode = newHead;
+            head = newHead;
+        } else {
+            Node<E> prev = curNode(index - 1);
+            prev.nextNode = new Node<>(element, prev.nextNode);
+        }
+        size++;
     }
 
     @Override
@@ -77,6 +96,34 @@ public class SingleCircleLinkedList<E> extends AbstractList<E> {
             node = node.nextNode;
         }
         return node;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("size=").append(size).append(", [");
+        Node<E> node = head;
+        for (int i = 0; i < size; i++) {
+            if (i != 0) {
+                string.append(", ");
+            }
+
+            string.append(node);
+
+            node = node.nextNode;
+        }
+        string.append("]");
+        return string.toString();
+    }
+
+    public static void main(String[] args) {
+        SingleCircleLinkedList<String> stringSingleCircleLinkedList = new SingleCircleLinkedList<>();
+        stringSingleCircleLinkedList.add("1");
+        stringSingleCircleLinkedList.add("3");
+        stringSingleCircleLinkedList.add("7");
+        stringSingleCircleLinkedList.add("5");
+        stringSingleCircleLinkedList.add(0, "10");
+        System.out.println(stringSingleCircleLinkedList);
     }
 
 }
