@@ -59,7 +59,23 @@ public class SingleCircleLinkedList<E> extends AbstractList<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        rangeCheck(index);
+        Node<E> node = head;
+        if (index == 0) {
+            if (size == 1) {
+                head = null;
+            } else {
+                Node<E> last = curNode(size - 1);
+                head = head.nextNode; // 删除元素
+                last.nextNode = head;
+            }
+        } else {
+            Node<E> prev = curNode(index - 1);
+            node = prev.nextNode;
+            prev.nextNode = node.nextNode;
+        }
+        size--;
+        return node.element;
     }
 
     @Override
@@ -107,9 +123,7 @@ public class SingleCircleLinkedList<E> extends AbstractList<E> {
             if (i != 0) {
                 string.append(", ");
             }
-
             string.append(node);
-
             node = node.nextNode;
         }
         string.append("]");
